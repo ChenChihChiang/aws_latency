@@ -8,6 +8,15 @@ from time import strftime
 import datetime
 import json
 
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+
+import requests
+
+chrome_driver_path = "/Users/johnchen/Dropbox/My Mac (Johns-Air)/Downloads/chromedriver"
+driver = webdriver.Chrome(executable_path=chrome_driver_path)
+
 
 if __name__ == '__main__':
     url = 'http://www.cloudping.info/'
@@ -15,7 +24,8 @@ if __name__ == '__main__':
     try:
         #driver = webdriver.Chrome(executable_path='./chromedriver')
         # Webdriver 的執行檔也可以使用 PhantomJS
-        driver = webdriver.PhantomJS('./phantomjs')
+        # driver = webdriver.PhantomJS('./phantomjs')
+
         driver.maximize_window()
         driver.set_page_load_timeout(60)
         driver.get(url)
@@ -69,3 +79,17 @@ if __name__ == '__main__':
         	f.write(aws_latency)
     finally:
         driver.quit()  # 關閉瀏覽器, 結束 webdriver process
+
+    headers = {
+        'Authorization': 'Bearer '
+        }
+
+    data = {
+        'message': aws_latency
+    }
+    url = 'https://notify-api.line.me/api/notify'
+
+    res = requests.post(url, data=data, headers=headers)
+    print(res)    
+
+
