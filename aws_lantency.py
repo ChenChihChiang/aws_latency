@@ -81,7 +81,7 @@ if __name__ == '__main__':
         driver.quit()  # 關閉瀏覽器, 結束 webdriver process
 
     headers = {
-        'Authorization': 'Bearer '
+        'Authorization': 'Bearer mrlPP0HF4OoPp7rLtMwk3sMkHhnqRfNOdjejUzthHz3'
         }
 
     data = {
